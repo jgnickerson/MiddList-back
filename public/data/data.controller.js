@@ -61,21 +61,52 @@ var posts = [
     }
 ];
 
-
-exports.categories = function(req, res) {
-    res.send(categories);
-};
-
-exports.posts = function(req, res) {
+exports.getPosts = function(req, res) {
     res.send(posts);
 };
 
-exports.newPost = function(req, res) {
+exports.getPost = function(req, res) {
+    var postId = parseInt(req.params.postId);
+    var post = _.find(posts, function(p) {
+        return p.postId === postId;
+    });
+    res.send(post);
+};
+
+exports.getPostCategory = function(req, res) {
+    var catId = parseInt(req.params.catId);
+    var cat = _.find(categories, function(cat) {
+       return cat.id === catId;
+    });
+    res.send(cat);
+};
+
+exports.getCategories = function(req, res) {
+    res.send(categories);
+};
+
+exports.addNewPost = function(req, res) {
     var newPost = req.body;
     newPost.id = currentId++;
     newPost.date = new Date();
     posts.push(newPost);
+    res.send();
 };
 
+exports.deletePost = function(req, res) {
+    var postId = parseInt(req.params.postId);
+    _.remove(posts, function(p) {
+        return p.postId === postId;
+    });
+    res.send();
+};
 
+exports.editPost = function(req, res) {
+    var updatedPost = req.body;
+    _.remove(posts, function(p) {
+        return p.postId === updatedPost.postId;
+     });
+    posts.push(updatedPost);
+    res.send();
+}
 
