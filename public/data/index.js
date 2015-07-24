@@ -6,4 +6,6 @@ router.get('/posts', controller.posts);
 
 router.get('/cats', controller.categories);
 
+router.post('/postForm', controller.newPost);
+
 module.exports = router;

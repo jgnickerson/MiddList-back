@@ -1,5 +1,13 @@
 var _ = require('lodash');
 
+var categories = [
+    {name: 'Electronics', id: 1},
+    {name: 'Gear', id: 2},
+    {name: 'Books', id: 3}
+];
+
+var currentId = 100;
+
 var posts = [
     {
         'author': 'Gordon',
@@ -53,17 +61,21 @@ var posts = [
     }
 ];
 
-var categories = [
-    {name: 'Electronics', id: 1},
-    {name: 'Gear', id: 2},
-    {name: 'Books', id: 3}
-];
-
-// Get list of things
-exports.posts = function(req, res) {
-    res.send(posts);
-};
 
 exports.categories = function(req, res) {
     res.send(categories);
 };
+
+exports.posts = function(req, res) {
+    res.send(posts);
+};
+
+exports.newPost = function(req, res) {
+    var newPost = req.body;
+    newPost.id = currentId++;
+    newPost.date = new Date();
+    posts.push(newPost);
+};
+
+
+
