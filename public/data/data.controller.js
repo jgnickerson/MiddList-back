@@ -65,6 +65,14 @@ exports.getPosts = function(req, res) {
     res.send(posts);
 };
 
+exports.getCategoryPosts = function(req, res) {
+    var catId = parseInt(req.params.catId);
+    var matches = _.filter(posts, function(p) {
+        return p.categoryId === catId;
+    });
+    res.send(matches);
+};
+
 exports.getPost = function(req, res) {
     var postId = parseInt(req.params.postId);
     var post = _.find(posts, function(p) {

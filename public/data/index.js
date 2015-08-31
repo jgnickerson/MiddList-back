@@ -4,6 +4,8 @@ var router = express.Router();
 
 router.get('/posts', controller.getPosts);
 
+router.get('/posts/:catId', controller.getCategoryPosts);
+
 router.get('/post/:postId', controller.getPost);
 
 router.get('/cats', controller.getCategories);
