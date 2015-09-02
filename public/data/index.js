@@ -4,18 +4,18 @@ var router = express.Router();
 
 router.get('/posts', controller.getPosts);
 
-router.get('/posts/:catId', controller.getCategoryPosts);
+router.get('/posts/:postId', controller.getPost);
 
-router.get('/post/:postId', controller.getPost);
+router.get('/category/:catId', controller.getCategoryPosts);
 
-router.get('/cats', controller.getCategories);
+router.get('/categories', controller.getCategories);
 
-router.get('/cat/:catId', controller.getPostCategory);
+router.get('/categories/:catId', controller.getCategory);
 
 router.post('/posts', controller.addNewPost);
 
-router.delete('/posts/:postId', controller.deletePost);
-
 router.put('/posts/:postId', controller.editPost);
+
+router.delete('/posts/:postId', controller.deletePost);
 
 module.exports = router;
