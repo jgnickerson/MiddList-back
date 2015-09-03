@@ -1,9 +1,22 @@
-module.exports = function(app) {
+var express = require('express');
+var controller = require('./data.controller');
+var router = express.Router();
 
-    app.use('/', require('./public/data'));
+router.get('/posts', controller.getPosts);
 
-    //universal redirect to posts
-    app.route('/*').get(function(req, res) {
-        res.redirect('/posts');
-    });
-};
+router.get('/posts/:postId', controller.getPost);
+
+router.get('/category/:catId', controller.getCategoryPosts);
+
+router.get('/categories', controller.getCategories);
+
+router.get('/categories/:catId', controller.getCategory);
+
+router.post('/posts', controller.addNewPost);
+
+router.put('/posts/:postId', controller.editPost);
+
+router.delete('/posts/:postId', controller.deletePost);
+
+module.exports = router;
+

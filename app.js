@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+//I don't know what any of this header stuff is
+//it came with the express scaffolder I used
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,HEAD,DELETE,OPTIONS');
@@ -32,7 +34,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./routes')(app);
+
+//find routes for everything in ./routes
+app.use('/', require('./routes'));
+//require('./routes')(app);
 
 
 // catch 404 and forward to error handler
