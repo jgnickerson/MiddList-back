@@ -58,7 +58,7 @@ exports.editPost = function(req, res){
 
 }
 
-exports.deletePost= function(req, res){
+exports.deletePost = function(req, res){
     var postId = req.params.postId;
     Post.remove({'_id' : postId}), function(err, post){
         if (err){
@@ -73,22 +73,24 @@ exports.deletePost= function(req, res){
 exports.addNewPost= function(req, res){
     /* Initialize and save new post */
     var newPost = new Post();
-    newPost.title = req.params.title;
-    newPost.author = req.params.author;
-    newPost.description = req.params.description;
-    newPost.category = req.params.category;
-    newPost.condition = req.params.condition;
-    newPost.price = req.params.condition;
-    newPost.photo = req.params.photo;
+    newPost.title = req.body.title;
+    newPost.author = req.body.author;
+    newPost.description = req.body.description;
+    newPost.category = req.body.category;
+    newPost.condition = req.body.condition;
+    newPost.price = req.body.condition;
+    newPost.photo = req.body.photo;
+    var creationDate = new Date();
+    newPost.date = creationDate.toISOString();
     newPost.save();
     /* Add new post to post list in desginated category */
     Category.findOne({'title' : newPost.category}, function(err, cat){
         //update category to contain new post
+        /*if (err){
+            res.send(err);
+        }else{
+            res.send();
+        }*/
     });
-    if (err){
-        res.send(err);
-    }else{
-        res.send();
-    }
-
+    res.send();
 }
