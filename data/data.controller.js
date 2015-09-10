@@ -60,14 +60,16 @@ exports.editPost = function(req, res){
 
 exports.deletePost = function(req, res){
     var postId = req.params.postId;
-    Post.remove({'_id' : postId}), function(err, post){
+    console.log("Deleting post #" + postId);
+    Post.findOne({'_id' : postId}, function(err, post){
         if (err){
+            console.log(err);
             res.send(err);
         }else{
-            console.log("Deleted post #" + post._id);
-            res.send("Deleted post #" + post._id);
+            post.remove();
+            res.send();
         }
-    }
+    });
 }
 
 exports.addNewPost= function(req, res){
