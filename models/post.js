@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-module.exports = mongoose.model('Post',{
+module.exports = mongoose.model('Post', new Schema({
     author: String,
     title: String,
     description: String,
@@ -9,4 +10,4 @@ module.exports = mongoose.model('Post',{
     category: String,
     photo: String,
     date: String
-});
+}));

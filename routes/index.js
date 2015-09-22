@@ -21,10 +21,21 @@ module.exports = function(passport){
 	});*/
 
 	/* Handle Login POST */
-    router.post('/login', passport.authenticate('login'),
-        function(req, res){
-            res.status(400);
-            res.send("User is logged in.");
+    router.post('/login', function(req, res, next){
+        passport.authenticate('login', function(err, user){
+            if (err){
+                console.log(err);
+                res.sendStatus(500);
+            }else{
+                if (user){
+                    res.sendStatus(200);
+                    console.log("Logged in user: " + user);
+                }else{
+                    res.sendStatus(401);
+                    console.log("User and password do not match.");
+                }
+            }
+        })(req,res);
         }
     );
                 
